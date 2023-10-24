@@ -4,13 +4,14 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev":"tsx src/index.ts -w",
+    "dev": "tsx src/index.ts -w",
     "test": "vitest"
   },
   "author": "Thaís Medeiros Dos Santos",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.20",
+    "axios": "^1.5.1",
     "tsx": "^3.14.0",
     "vitest": "^0.34.6"
   },
