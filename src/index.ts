@@ -2,6 +2,9 @@ import express from 'express';
 
 // Cria uma instância do aplicativo Express
 const app = express();
+//Esqueci de transformar o body em json 
+//Coloque isso no seu código
+app.use(express.json());
 
 type Filme = {
     id: number,
@@ -10,7 +13,6 @@ type Filme = {
     foto: string,
 }
 const filmes_repositorio:Filme[] = []
-
 
 // Define uma rota padrão
 app.get('/filmes/:id', (req, res) => {
@@ -28,7 +30,6 @@ app.post('/filmes', (req, res) => {
     filmes_repositorio.push(filme)
     res.status(201).send(filme)
 });
-
 
 // Inicia o servidor
 app.listen(3000, () => {
