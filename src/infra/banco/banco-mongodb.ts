@@ -10,23 +10,34 @@ export default class BancoMongoDB implements FilmeRepositorioInterface{
         }catch(erro){
             console.log(erro)
         }
-        this.filmeModel = mongoose.model('Filme', new mongoose.Schema({
-            _id:String,
-            titulo:String,
-            descricao:String,
-            foto:String          
-        }))
+        this.filmeModel = 
+        mongoose.model('filme', new mongoose.Schema({
+                id: String,
+                titulo: String,
+                descricao: String,
+                foto: String
+            })
+        )
     }
     public async salvar(filme:Filme): Promise<boolean> {
         const filmeDTO = {
-            _id:filme.id,
-            titulo:filme.titulo,
-            descricao:filme.descricao,
-            foto:filme.foto
+            id: filme.id.toString(),
+            titulo: filme.titulo,
+            descricao: filme.descricao,
+            foto: filme.foto
         }
-        const filmeModelo = new this.filmeModel(filmeDTO)
-        const result = await filmeModelo.save()
-        return !!result
+        try{
+            const filmeModelo = new this.filmeModel({...filmeDTO})
+            const result = await filmeModelo.save()
+            return !!result
+        }catch(erro){
+            console.log(erro)
+            return false
+        }
+        
+    }
+    public desconectar(): void {
+        mongoose.disconnect()
     }
 }
 type Filme = {

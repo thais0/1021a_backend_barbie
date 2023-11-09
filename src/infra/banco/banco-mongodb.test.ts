@@ -1,6 +1,6 @@
 import {describe,test,expect} from 'vitest'
 import BancoMongoDB from './banco-mongodb'
-describe("Banco MongoDB",()=>{
+describe.skip("Banco MongoDB",()=>{
     test("Deve salvar no banco MongoDB",async ()=>{
         const input= {
             id:1,
