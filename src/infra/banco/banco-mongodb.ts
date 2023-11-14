@@ -2,7 +2,7 @@ import FilmeRepositorioInterface from "../../aplicacao/filme-repositorio-interfa
 import mongoose from 'mongoose'
 require('dotenv').config()
 export default class BancoMongoDB implements FilmeRepositorioInterface{
-    private filmeModel:any
+    public filmeModel:any
     constructor(){
         try{
             mongoose.connect(process.env.MONGODB_URL || '')
@@ -12,7 +12,7 @@ export default class BancoMongoDB implements FilmeRepositorioInterface{
         }
         this.filmeModel = 
         mongoose.model('filme', new mongoose.Schema({
-                id: String,
+                _id: Number,
                 titulo: String,
                 descricao: String,
                 foto: String
@@ -21,7 +21,7 @@ export default class BancoMongoDB implements FilmeRepositorioInterface{
     }
     public async salvar(filme:Filme): Promise<boolean> {
         const filmeDTO = {
-            id: filme.id.toString(),
+            _id: filme.id,
             titulo: filme.titulo,
             descricao: filme.descricao,
             foto: filme.foto
@@ -36,12 +36,29 @@ export default class BancoMongoDB implements FilmeRepositorioInterface{
         }
         
     }
+    public async listar(): Promise<Filme[]> {
+        const filmes = await this.filmeModel.find({})
+        return filmes.map((filme:FilmeDTO)=>{
+            return {
+                id: filme._id,
+                titulo: filme.titulo,
+                descricao: filme.descricao,
+                foto: filme.foto
+            }
+        })
+    }
     public desconectar(): void {
         mongoose.disconnect()
     }
 }
 type Filme = {
     id:number,
+    titulo:string,
+    descricao:string,
+    foto:string
+}
+type FilmeDTO = {
+    _id:number,
     titulo:string,
     descricao:string,
     foto:string

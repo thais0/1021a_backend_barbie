@@ -14,11 +14,10 @@ let filmes_repositorio:Filme[] = []
 
 
 // Define uma rota padrão
-app.get('/filmes/:id', (req, res) => {
-    const id = parseInt(req.params.id)
-    const filme = filmes_repositorio.find(filme => filme.id === id)
-    if (!filme) res.status(404).send()
-    res.send(filme)        
+app.get('/filmes', (req, res) => {
+    //const filme = filmes_repositorio.find(filme => filme.id === id)
+    //if (!filme) res.status(404).send()
+    res.send("Alguma coisa")        
 });
 
 app.post('/filmes', (req:Request, res) => {

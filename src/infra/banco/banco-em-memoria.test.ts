@@ -1,8 +1,7 @@
-import {describe,test,expect } from 'vitest'
+import {describe,test,expect} from 'vitest'
 import BancoEmMemoria from './banco-em-memoria'
-
 describe("Banco em memória",()=>{
-    test ("Deve salvar no banco em memória",async ()=>{
+    test("Deve salvar no banco em memória",async ()=>{
         const input= {
             id:1,
             titulo:"test",
