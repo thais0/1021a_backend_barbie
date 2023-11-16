@@ -14,8 +14,6 @@ app.get('/filmes', async (req, res) => {
 });
 
 app.post('/filmes', (req:Request, res) => {
-    const salvaFilme =new SalvaFilme(bancoMongoDB)
-    const filmes = salvaFilme.execute(filme)
     const {id, titulo, descricao, foto} = req.body
     const filme:Filme = {
         id,
@@ -23,6 +21,8 @@ app.post('/filmes', (req:Request, res) => {
         descricao,
         foto,
     }
+    const salvaFilme =new SalvaFilme(bancoMongoDB)
+    const filmes = salvaFilme.execute(filme)
     filmes_repositorio.push(filme)
     res.status(201).send(filme)
 });
