@@ -13,7 +13,3 @@ type Filme = {
     foto:string
 }
 
-
-
-
-
