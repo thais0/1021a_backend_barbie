@@ -12,4 +12,3 @@ type Filme = {
     descricao:string,
     foto:string
 }
-
